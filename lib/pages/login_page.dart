@@ -3,7 +3,7 @@ import 'package:flutter_app_template/pages/home_page.dart';
 import 'package:flutter_app_template/pages/signup_page.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simple_shadow/simple_shadow.dart';
+import 'package:flutter_app_template/generate_styles.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -59,27 +59,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
 
                         //Login form email
-                        SimpleShadow(
-                          sigma: 7,
-                          color: Colors.grey.withOpacity(0.5),
-                          offset: const Offset(0, 10),
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                              fillColor: Colors.white,
-                              filled: true,
-                              hintText: 'Email Address',
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
+                        GenerateStyles.getTextForm(
+                          TextFormField(
+                            decoration: GenerateStyles.getInputDecoration(
+                              'Email Address',
                             ),
                           ),
                         ),
@@ -89,27 +72,12 @@ class _LoginPageState extends State<LoginPage> {
                         ),
 
                         //Login form password
-                        SimpleShadow(
-                          sigma: 7,
-                          color: Colors.grey.withOpacity(0.5),
-                          offset: const Offset(0, 10),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              fillColor: Colors.white,
-                              filled: true,
-                              hintText: 'Password',
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
+                        GenerateStyles.getTextForm(
+                          TextFormField(
+                            obscureText: !isVisible,
+                            decoration: GenerateStyles.getInputDecoration(
+                              'Password',
+                            ).copyWith(
                               suffixIcon: IconButton(
                                 onPressed: () => setState(() {
                                   isVisible = !isVisible;
@@ -120,7 +88,6 @@ class _LoginPageState extends State<LoginPage> {
                                 color: blueThemed,
                               ),
                             ),
-                            obscureText: !isVisible,
                           ),
                         ),
 
@@ -131,17 +98,20 @@ class _LoginPageState extends State<LoginPage> {
                         //Submit button
                         ElevatedButton(
                           onPressed: () => Get.offNamed(HomePage.tag),
-                          child: Text(
+                          child: const Text(
                             'Sign In',
-                            style: GoogleFonts.roboto(
-                                fontWeight: FontWeight.bold, fontSize: 18),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(400, 60),
                             primary: blueThemed,
                             shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
                             ),
                           ),
                         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simple_shadow/simple_shadow.dart';
+import 'package:flutter_app_template/generate_styles.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -78,27 +78,10 @@ class _SignupPageState extends State<SignupPage> {
                         ),
 
                         //Login form name
-                        SimpleShadow(
-                          sigma: 7,
-                          color: Colors.grey.withOpacity(0.5),
-                          offset: const Offset(0, 10),
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                              fillColor: Colors.white,
-                              filled: true,
-                              hintText: 'Name',
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
+                        GenerateStyles.getTextForm(
+                          TextFormField(
+                            decoration: GenerateStyles.getInputDecoration(
+                              'Name',
                             ),
                           ),
                         ),
@@ -108,27 +91,10 @@ class _SignupPageState extends State<SignupPage> {
                         ),
 
                         //Login form email
-                        SimpleShadow(
-                          sigma: 7,
-                          color: Colors.grey.withOpacity(0.5),
-                          offset: const Offset(0, 10),
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                              fillColor: Colors.white,
-                              filled: true,
-                              hintText: 'Email Address',
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
+                        GenerateStyles.getTextForm(
+                          TextFormField(
+                            decoration: GenerateStyles.getInputDecoration(
+                              'Email Address',
                             ),
                           ),
                         ),
@@ -138,27 +104,12 @@ class _SignupPageState extends State<SignupPage> {
                         ),
 
                         //Login form password
-                        SimpleShadow(
-                          sigma: 7,
-                          color: Colors.grey.withOpacity(0.5),
-                          offset: const Offset(0, 10),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              fillColor: Colors.white,
-                              filled: true,
-                              hintText: 'Password',
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
+                        GenerateStyles.getTextForm(
+                          TextFormField(
+                            obscureText: !isVisible,
+                            decoration: GenerateStyles.getInputDecoration(
+                              'Password',
+                            ).copyWith(
                               suffixIcon: IconButton(
                                 onPressed: () => setState(() {
                                   isVisible = !isVisible;
@@ -169,7 +120,6 @@ class _SignupPageState extends State<SignupPage> {
                                 color: blueThemed,
                               ),
                             ),
-                            obscureText: !isVisible,
                           ),
                         ),
 
@@ -180,10 +130,12 @@ class _SignupPageState extends State<SignupPage> {
                         //Submit button
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text(
+                          child: const Text(
                             'Sign Up',
-                            style: GoogleFonts.roboto(
-                                fontWeight: FontWeight.bold, fontSize: 18),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(400, 60),
@@ -210,7 +162,7 @@ class _SignupPageState extends State<SignupPage> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () => Navigator.pop(context),
+                              onTap: () => Get.back(),
                               child: Text(
                                 'Sign In',
                                 style: TextStyle(
