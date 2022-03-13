@@ -3,10 +3,18 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
 
   static const tag = "/signup";
+
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  var blueThemed = const Color(0xFF0e4a86);
+  var isVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +22,7 @@ class SignupPage extends StatelessWidget {
       body: SingleChildScrollView(
         reverse: true,
         child: Container(
+          height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             color: Colors.white,
           ),
@@ -21,9 +30,7 @@ class SignupPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 50,
-              ),
+              const Spacer(flex: 2),
 
               //Arrow Back Button
               GestureDetector(
@@ -39,9 +46,9 @@ class SignupPage extends StatelessWidget {
                         topRight: Radius.circular(10),
                         bottomRight: Radius.circular(10),
                       )),
-                  child: const Icon(
+                  child: Icon(
                     Icons.arrow_back_ios,
-                    color: Color(0xFF4b7094),
+                    color: blueThemed,
                   ),
                 ),
               ),
@@ -59,7 +66,7 @@ class SignupPage extends StatelessWidget {
                           child: Text(
                             'Hello!\nSignup to\nget started',
                             style: GoogleFonts.playfairDisplay(
-                              color: const Color(0xFF315982),
+                              color: blueThemed,
                               fontSize: 32,
                               fontWeight: FontWeight.bold,
                             ),
@@ -136,23 +143,33 @@ class SignupPage extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.5),
                           offset: const Offset(0, 10),
                           child: TextFormField(
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               fillColor: Colors.white,
                               filled: true,
                               hintText: 'Password',
-                              enabledBorder: OutlineInputBorder(
+                              enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(10),
                                 ),
                               ),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(10),
                                 ),
+                              ),
+                              suffixIcon: IconButton(
+                                onPressed: () => setState(() {
+                                  isVisible = !isVisible;
+                                }),
+                                icon: Icon(isVisible
+                                    ? Icons.remove_red_eye
+                                    : Icons.visibility_off),
+                                color: blueThemed,
                               ),
                             ),
+                            obscureText: !isVisible,
                           ),
                         ),
 
@@ -170,7 +187,7 @@ class SignupPage extends StatelessWidget {
                           ),
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(400, 60),
-                            primary: const Color(0xFF0e4a86),
+                            primary: blueThemed,
                             shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
@@ -185,20 +202,20 @@ class SignupPage extends StatelessWidget {
                         //Go to sign in page
                         Row(
                           children: [
-                            const Text(
+                            Text(
                               'Already Have An Account? ',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF0e4a86),
+                                color: blueThemed,
                               ),
                             ),
                             GestureDetector(
                               onTap: () => Navigator.pop(context),
-                              child: const Text(
+                              child: Text(
                                 'Sign In',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF0e4a86),
+                                  color: blueThemed,
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
@@ -210,6 +227,8 @@ class SignupPage extends StatelessWidget {
                   ),
                 ),
               ),
+
+              const Spacer(),
 
               //Background image
               Center(

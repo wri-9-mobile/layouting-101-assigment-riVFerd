@@ -15,12 +15,16 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var isVisible = false;
+  var blueThemed = const Color(0xFF0e4a86);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         reverse: true,
         child: Container(
+          height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             color: Colors.white,
           ),
@@ -28,9 +32,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 70,
-              ),
+              const Spacer(),
 
               //Greeting and login form
               Padding(
@@ -45,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text(
                             'Hello Again!\nWelcome\nback',
                             style: GoogleFonts.playfairDisplay(
-                              color: const Color(0xFF315982),
+                              color: blueThemed,
                               fontSize: 32,
                               fontWeight: FontWeight.bold,
                             ),
@@ -92,23 +94,33 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.grey.withOpacity(0.5),
                           offset: const Offset(0, 10),
                           child: TextFormField(
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               fillColor: Colors.white,
                               filled: true,
                               hintText: 'Password',
-                              enabledBorder: OutlineInputBorder(
+                              enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(10),
                                 ),
                               ),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(10),
                                 ),
+                              ),
+                              suffixIcon: IconButton(
+                                onPressed: () => setState(() {
+                                  isVisible = !isVisible;
+                                }),
+                                icon: Icon(isVisible
+                                    ? Icons.remove_red_eye
+                                    : Icons.visibility_off),
+                                color: blueThemed,
                               ),
                             ),
+                            obscureText: !isVisible,
                           ),
                         ),
 
@@ -126,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(400, 60),
-                            primary: const Color(0xFF0e4a86),
+                            primary: blueThemed,
                             shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
@@ -142,20 +154,20 @@ class _LoginPageState extends State<LoginPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Not Registered?',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF0e4a86),
+                                color: blueThemed,
                               ),
                             ),
                             GestureDetector(
                               onTap: () => Get.toNamed(SignupPage.tag),
-                              child: const Text(
+                              child: Text(
                                 'Sign Up',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF0e4a86),
+                                  color: blueThemed,
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
@@ -168,9 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
 
-              const SizedBox(
-                height: 100,
-              ),
+              const Spacer(),
 
               //Background image
               Center(
